@@ -25,7 +25,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu
+          sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu nasm
           wget "https://github.com/tianocore/edk2/releases/download/vUDK2018/edk2-vUDK2018.tar.gz" -O edk2.tar.gz
           tar zxf edk2.tar.gz && rm -rf edk2.tar.gz
           sudo mv edk2-* /usr/local/edk2-vUDK2018
