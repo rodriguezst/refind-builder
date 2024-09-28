@@ -37,7 +37,7 @@ jobs:
           sed -i 's/^TARGET_ARCH.*/TARGET_ARCH = AARCH64/g' Conf/target.txt
           sed -i 's/^TOOL_CHAIN_TAG.*/TOOL_CHAIN_TAG = GCC5/g' Conf/target.txt
           sed -i 's/^TARGET_ARCH.*/TARGET_ARCH = AARCH64/g' Conf/target.txt
-          cat target.txt
+          cat Conf/target.txt
           make -C BaseTools
           make -C BaseTools/Source/C
           build
