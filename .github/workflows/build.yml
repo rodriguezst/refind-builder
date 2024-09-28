@@ -26,7 +26,6 @@ jobs:
       - name: Run a multi-line script
         run: |
           sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu
-          export GCC5_AARCH64_PREFIX=aarch64-linux-gnu-
           wget "https://github.com/tianocore/edk2/releases/download/vUDK2018/edk2-vUDK2018.tar.gz" -O edk2.tar.gz
           tar zxvf edk2.tar.gz && rm -rf edk2.tar.gz
           sudo mv edk2-* /usr/local/edk2-vUDK2018
@@ -39,7 +38,9 @@ jobs:
           sed -i 's/^TARGET_ARCH.*/TARGET_ARCH = AARCH64/g' Conf/target.txt
           sed -i 's/^TOOL_CHAIN_TAG.*/TOOL_CHAIN_TAG = GCC5/g' Conf/target.txt
           sed -i 's/^TARGET_ARCH.*/TARGET_ARCH = AARCH64/g' Conf/target.txt
+          sed -i 's/ENV(GCC5_AARCH64_PREFIX)/\/usr\/bin\/aarch64-linux-gnu-/g' Conf/tools_def.txt
           cat Conf/target.txt
+          cat Conf/tools_def.txt
           make -C BaseTools
           make -C BaseTools/Source/C
           build
