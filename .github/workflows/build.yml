@@ -33,10 +33,10 @@ jobs:
           source edksetup.sh
           sed -i 's/-Werror //g' BaseTools/Source/C/Makefiles/header.makefile
           cat BaseTools/Source/C/Makefiles/header.makefile
-          sed -i 's/^ACTIVE_PLATFORM.*/ACTIVE_PLATFORM = MdePkg\/MdePkg.dsc/g' Conf/target.txt
-          sed -i 's/^TARGET.*/TARGET = RELEASE/g' Conf/target.txt
-          sed -i 's/^TARGET_ARCH.*/TARGET_ARCH = AARCH64/g' Conf/target.txt
-          sed -i 's/^TOOL_CHAIN_TAG.*/TOOL_CHAIN_TAG = GCC5/g' Conf/target.txt
+          sed -i 's/^ACTIVE_PLATFORM .*/ACTIVE_PLATFORM = MdePkg\/MdePkg.dsc/g' Conf/target.txt
+          sed -i 's/^TARGET .*/TARGET = RELEASE/g' Conf/target.txt
+          sed -i 's/^TARGET_ARCH .*/TARGET_ARCH = AARCH64/g' Conf/target.txt
+          sed -i 's/^TOOL_CHAIN_TAG .*/TOOL_CHAIN_TAG = GCC5/g' Conf/target.txt
           sed -i 's/ENV(GCC5_AARCH64_PREFIX)/\/usr\/bin\/aarch64-linux-gnu-/g' Conf/tools_def.txt
           cat Conf/target.txt
           cat Conf/tools_def.txt
