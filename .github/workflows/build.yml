@@ -27,7 +27,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu
           wget "https://github.com/tianocore/edk2/releases/download/vUDK2018/edk2-vUDK2018.tar.gz" -O edk2.tar.gz
-          tar zxvf edk2.tar.gz && rm -rf edk2.tar.gz
+          tar zxf edk2.tar.gz && rm -rf edk2.tar.gz
           sudo mv edk2-* /usr/local/edk2-vUDK2018
           pushd /usr/local/edk2-vUDK2018
           source edksetup.sh
@@ -37,7 +37,6 @@ jobs:
           sed -i 's/^TARGET.*/TARGET = RELEASE/g' Conf/target.txt
           sed -i 's/^TARGET_ARCH.*/TARGET_ARCH = AARCH64/g' Conf/target.txt
           sed -i 's/^TOOL_CHAIN_TAG.*/TOOL_CHAIN_TAG = GCC5/g' Conf/target.txt
-          sed -i 's/^TARGET_ARCH.*/TARGET_ARCH = AARCH64/g' Conf/target.txt
           sed -i 's/ENV(GCC5_AARCH64_PREFIX)/\/usr\/bin\/aarch64-linux-gnu-/g' Conf/tools_def.txt
           cat Conf/target.txt
           cat Conf/tools_def.txt
@@ -46,7 +45,7 @@ jobs:
           build
           popd
           wget "https://github.com/rodriguezst/rEFInd/archive/refs/heads/v0.14.2.tar.gz"
-          tar zxvf v0.14.2.tar.gz && rm v0.14.2.tar.gz
+          tar zxf v0.14.2.tar.gz && rm v0.14.2.tar.gz
           pushd rEFInd-0.14.2
           make edk2 OMIT_SBAT=1
           find . | grep .efi
