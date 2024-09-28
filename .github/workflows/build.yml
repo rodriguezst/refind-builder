@@ -1,0 +1,49 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          wget "https://github.com/tianocore/edk2/releases/download/vUDK2018/edk2-vUDK2018.tar.gz" -O edk2.tar.gz
+          tar zxvf edk2.tar.gz && rm -rf edk2.tar.gz
+          mv edk2-* /usr/local/edk2-vUDK2018
+          pushd /usr/local/edk2-vUDK2018
+          source edksetup.sh
+          sed -i 's/-Werror //g' BaseTools/Source/C/Makefiles/header.makefile
+          cat BaseTools/Source/C/Makefiles/header.makefile
+          sed -i 's/^ACTIVE_PLATFORM/ACTIVE_PLATFORM = MdePkg/MdePkg.dsc/g' target.txt
+          sed -i 's/^TARGET/TARGET = RELEASE/g' target.txt
+          sed -i 's/^TARGET_ARCH/TARGET_ARCH = AARCH64/g' target.txt
+          sed -i 's/^TOOL_CHAIN_TAG/TOOL_CHAIN_TAG = GCC5/g' target.txt
+          sed -i 's/^TARGET_ARCH/TARGET_ARCH = AARCH64/g' target.txt
+          cat target.txt
+          make -C BaseTools
+          make -C BaseTools/Source/C
+          build
+          popd
+          wget "https://github.com/rodriguezst/rEFInd/archive/refs/heads/v0.14.2.tar.gz"
+          tar zxvf v0.14.2.tar.gz && rm v0.14.2.tar.gz
+          pushd rEFInd-0.14.2
+          make edk2 OMIT_SBAT=1
+          find . | grep .efi
