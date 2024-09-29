@@ -25,6 +25,7 @@ jobs:
     steps:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
+        shell: bash
         run: |
           DEBIAN_FRONTEND=noninteractive apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qqy install ccache build-essential python python-pip qemu sudo vim libgcc-5-dev uuid-dev nasm iasl git gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf wget zip
           wget "https://github.com/tianocore/edk2/releases/download/vUDK2018/edk2-vUDK2018.tar.gz" -O edk2.tar.gz
