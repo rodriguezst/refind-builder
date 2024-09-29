@@ -49,6 +49,7 @@ jobs:
           wget "https://github.com/rodriguezst/rEFInd/archive/refs/heads/v0.14.2.tar.gz"
           tar zxf v0.14.2.tar.gz && rm v0.14.2.tar.gz
           pushd rEFInd-0.14.2
+          #sed -i 's/-O binary/--target=efi-app-aarch64/g' Make.common
           make edk2 OMIT_SBAT=1 ARCH=aarch64
           make fs_edk2 OMIT_SBAT=1 ARCH=aarch64
           find . | grep ".efi"
