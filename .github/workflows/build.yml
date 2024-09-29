@@ -50,5 +50,6 @@ jobs:
           tar zxf v0.14.2.tar.gz && rm v0.14.2.tar.gz
           pushd rEFInd-0.14.2
           make edk2 OMIT_SBAT=1 ARCH=aarch64
+          make fs_edk2 OMIT_SBAT=1 ARCH=aarch64
           find . | grep ".efi"
           
