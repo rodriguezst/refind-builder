@@ -19,7 +19,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
-    container: ubuntu:18.04
+    #container: ubuntu:18.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -27,6 +27,7 @@ jobs:
       - name: Run a multi-line script
         shell: bash
         run: |
+          cat <<EOF > docker-script.sh
           DEBIAN_FRONTEND=noninteractive apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qqy install ccache build-essential python python-pip sudo libgcc-5-dev uuid-dev nasm iasl git gcc-aarch64-linux-gnu wget zip
           wget "https://github.com/tianocore/edk2/releases/download/vUDK2018/edk2-vUDK2018.tar.gz" -O edk2.tar.gz
           tar zxf edk2.tar.gz && rm -rf edk2.tar.gz
@@ -53,4 +54,8 @@ jobs:
           make edk2 OMIT_SBAT=1 ARCH=aarch64
           make fs_edk2 OMIT_SBAT=1 ARCH=aarch64
           find . | grep ".efi"
+          echo "***** End of Docker Script *****"
+          EOF
+          docker run --rm -it -v $(PWD):$(PWD) -w $(PWD) ubuntu:18.04 /bin/bash -c docker-script.sh
+          find . | grep refind_aa64.efi
           
