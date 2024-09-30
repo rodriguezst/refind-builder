@@ -56,6 +56,6 @@ jobs:
           find . | grep ".efi"
           echo "***** End of Docker Script *****"
           EOF
-          docker run --rm -v $(PWD):$(PWD) -w $(PWD) ubuntu:18.04 /bin/bash -c docker-script.sh
+          docker run --rm -v $(PWD):/workspace -w /workspace ubuntu:18.04 /bin/bash -c docker-script.sh
           find . | grep refind_aa64.efi
           
