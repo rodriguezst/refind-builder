@@ -28,6 +28,7 @@ jobs:
         shell: bash
         run: |
           cat <<EOF > docker-script.sh
+          #!/bin/bash
           DEBIAN_FRONTEND=noninteractive apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qqy install ccache build-essential python python-pip sudo libgcc-5-dev uuid-dev nasm iasl git gcc-aarch64-linux-gnu wget zip
           wget "https://github.com/tianocore/edk2/releases/download/vUDK2018/edk2-vUDK2018.tar.gz" -O edk2.tar.gz
           tar zxf edk2.tar.gz && rm -rf edk2.tar.gz
@@ -56,6 +57,7 @@ jobs:
           find . | grep ".efi"
           echo "***** End of Docker Script *****"
           EOF
-          docker run --rm -v $(pwd):/workspace -w /workspace ubuntu:18.04 /bin/bash -c docker-script.sh
+          chmod +x docker-script.sh
+          docker run --rm -v $(pwd):$(pwd) -w $(pwd) ubuntu:18.04 ./docker-script.sh
           find . | grep refind_aa64.efi
           
