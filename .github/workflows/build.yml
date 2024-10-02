@@ -58,7 +58,7 @@ jobs:
           echo "***** End of Docker Script *****"
           EOF
           chmod +x docker-script.sh
-          docker run --rm -v $(pwd):$(pwd) -w $(pwd) ubuntu:20.04 ./docker-script.sh
+          docker run --rm -v $(pwd):$(pwd) -w $(pwd) ubuntu:22.04 ./docker-script.sh
           find . | grep refind_aa64.efi
       - uses: actions/upload-artifact@v4
         with:
