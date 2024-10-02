@@ -52,13 +52,13 @@ jobs:
           tar zxf v0.14.2.tar.gz && rm v0.14.2.tar.gz
           pushd rEFInd-0.14.2
           sed -i 's/-O binary/--target=efi-app-aarch64/g' Make.common
-          make edk2 ARCH=aarch64
-          make fs_edk2 ARCH=aarch64
+          make edk2 ARCH=aarch64 || exit 1
+          make fs_edk2 ARCH=aarch64 || exit 1
           find . | grep ".efi"
           echo "***** End of Docker Script *****"
           EOF
           chmod +x docker-script.sh
-          docker run --rm -v $(pwd):$(pwd) -w $(pwd) ubuntu:18.04 ./docker-script.sh
+          docker run --rm -v $(pwd):$(pwd) -w $(pwd) ubuntu:20.04 ./docker-script.sh
           find . | grep refind_aa64.efi
       - uses: actions/upload-artifact@v4
         with:
