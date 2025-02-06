@@ -6,9 +6,6 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -48,9 +45,9 @@ jobs:
           make -C BaseTools/Source/C
           build
           popd
-          wget "https://github.com/rodriguezst/rEFInd/archive/refs/heads/v0.14.2.tar.gz"
-          tar zxf v0.14.2.tar.gz && rm v0.14.2.tar.gz
-          pushd rEFInd-0.14.2
+          wget "https://github.com/rodriguezst/rEFInd/archive/refs/heads/GopRotate.tar.gz"
+          tar zxf rEFInd-GopRotate.tar.gz && rm rEFInd-GopRotate.tar.gz
+          pushd rEFInd-GopRotate
           #sed -i 's/-O binary/--target=efi-app-aarch64/g' Make.common
           make edk2 OMIT_SBAT=1 ARCH=aarch64
           make fs_edk2 OMIT_SBAT=1 ARCH=aarch64
