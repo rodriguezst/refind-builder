@@ -50,6 +50,7 @@ jobs:
           pushd rEFInd-GopRotate
           rm -rf GopRotate
           git clone "https://github.com/apop2/GopRotate" /usr/local/edk2-vUDK2018/GopRotatePkg
+          sed -i 's/GopRotate\/GopRotatePkg.dec/GopRotatePkg\/GopRotatePkg.dec/g' refind.inf
           sed -i 's/GopRotate\/GopRotate\/GopRotate.inf/GopRotatePkg\/GopRotate\/GopRotate.inf/g' RefindPkg.dsc
           #sed -i 's/-O binary/--target=efi-app-aarch64/g' Make.common
           make edk2 OMIT_SBAT=1 ARCH=aarch64
