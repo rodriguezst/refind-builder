@@ -46,7 +46,7 @@ jobs:
           build
           popd
           wget "https://github.com/rodriguezst/rEFInd/archive/refs/heads/GopRotate.tar.gz"
-          tar zxf rEFInd-GopRotate.tar.gz && rm rEFInd-GopRotate.tar.gz
+          tar zxf GopRotate.tar.gz && rm GopRotate.tar.gz
           pushd rEFInd-GopRotate
           #sed -i 's/-O binary/--target=efi-app-aarch64/g' Make.common
           make edk2 OMIT_SBAT=1 ARCH=aarch64
