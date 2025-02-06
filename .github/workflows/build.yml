@@ -61,5 +61,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: refind
-          path: ${{ github.workspace }}/rEFInd-0.14.2/*
+          path: ${{ github.workspace }}/rEFInd-GopRotate/*
 
